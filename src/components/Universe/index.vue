@@ -25,22 +25,18 @@ onMounted(() => {
   const earthModel = new EarthModel(scene)
   const marsModel = new MarsModel(scene)
   const rocketModel = new RocketModel(scene)
-
   const astronautModel = new AstronautModel(scene)
 
   starshipModel.load()
   earthModel.load()
   marsModel.load()
   rocketModel.load()
-
   astronautModel.load()
 
-  // load Astronaut model
-
-  // rotatePlaneta
   const rotatePlanets = () => {
     const planets = [rocketModel.rocketScene, earthModel.earthScene]
 
+    if (!planets) return
     if (planets.some((i) => i)) {
       planets.forEach((planet) => {
         planet!.scene.rotation.y += 0.001
@@ -65,7 +61,31 @@ onMounted(() => {
 
   animate()
 
-  // add responsivity resize
+  // Control keys
+
+  const keysPressed = {}
+
+  document.addEventListener(
+    'keydown',
+    (event) => {
+      if (event.shiftKey) {
+      } else {
+        ;(keysPressed as any)[event.key.toLowerCase()] = false
+      }
+    },
+    false
+  )
+
+  document.addEventListener(
+    'keyup',
+    (event) => {
+      ;(keysPressed as any)[event.key.toLowerCase()] = false
+    },
+    false
+  )
+
+  console.log(keysPressed)
+
   // addEventListener('keydown', (e) => {
   //   const moveCharacter = () => {
   //     if (!loadedMars) return
