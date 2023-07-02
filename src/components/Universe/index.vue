@@ -1,9 +1,6 @@
 <script lang="ts" setup>
 import * as THREE from 'three'
 import { onMounted } from 'vue'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 
 // imports planets and astronaut
 
@@ -13,26 +10,14 @@ import { MarsModel } from '../../models/mars/MarsMode'
 import { RocketModel } from '../../models/rocket/RocketModel'
 
 import { AstronautModel } from '../../models/astronaut/Astronaut'
-import * as t from './types'
-
-const create3dSpace = (camera: t.ICamera, renderer: t.IRenderer) => {
-  renderer.setSize(window.innerWidth, window.innerHeight)
-  document.body.appendChild(renderer.domElement)
-
-  new OrbitControls(camera, renderer.domElement)
-}
+import { Galaxy } from '../../controls/Galaxy'
 
 onMounted(() => {
-  // set camera and scene
-  const camera = new THREE.PerspectiveCamera(
-    75,
-    innerWidth / innerHeight,
-    0.1,
-    1000
-  )
-  const scene = new THREE.Scene()
+  const galaxy = new Galaxy()
 
-  const renderer = new THREE.WebGLRenderer()
+  const scene = galaxy.scene
+  const camera = galaxy.camera
+  const renderer = galaxy.renderer
 
   // load 3d-models
 
@@ -64,22 +49,6 @@ onMounted(() => {
     }
   }
 
-  //lights
-
-  const light = new THREE.DirectionalLight(0xffffff, 1)
-  const lightUp = new THREE.DirectionalLight(0xffffff, 1)
-
-  light.position.set(1, 0, 1)
-  lightUp.position.set(0, 1, 0)
-
-  // add mash-models
-  scene.add(light)
-  scene.add(lightUp)
-
-  // camera position
-  camera.position.z = 6
-  camera.rotation.x = 1.4
-
   // animate framers
   const clock = new THREE.Clock()
 
@@ -94,16 +63,9 @@ onMounted(() => {
     astronautModel.mixer.update(clock.getDelta())
   }
 
-  create3dSpace(camera, renderer)
   animate()
 
   // add responsivity resize
-  addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight
-    camera.updateProjectionMatrix()
-    renderer.setSize(window.innerWidth, window.innerHeight)
-  })
-
   // addEventListener('keydown', (e) => {
   //   const moveCharacter = () => {
   //     if (!loadedMars) return
