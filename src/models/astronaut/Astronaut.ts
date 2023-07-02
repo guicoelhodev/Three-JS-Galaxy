@@ -1,9 +1,16 @@
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 import * as THREE from 'three'
 
+type IAnimation = {
+  clip: THREE.AnimationClip
+  action: THREE.AnimationAction
+  name: string
+}
+
 export class AstronautModel {
   private scene: THREE.Scene
   public mixer?: THREE.AnimationMixer
+  public animations: IAnimation[] = []
 
   constructor(scene: THREE.Scene) {
     this.scene = scene
@@ -26,6 +33,8 @@ export class AstronautModel {
       this.scene.add(fbx)
       this.mixer = new THREE.AnimationMixer(fbx)
       this.animate(this.mixer)
+
+      //console.log(this.animations)
     })
   }
 
@@ -33,10 +42,32 @@ export class AstronautModel {
     const animLoader = new FBXLoader()
     animLoader.setPath('../../assets/astronaut/')
 
-    animLoader.load('walking.fbx', (anim) => {
-      const idle = mixer.clipAction(anim.animations[0])
+    animLoader.load('walking.fbx', (a) => this.Onload('walking', a, mixer))
+    animLoader.load('sitted.fbx', (a) => this.Onload('sitted', a, mixer))
+    animLoader.load('standingUp.fbx', (a) =>
+      this.Onload('standingUp', a, mixer)
+    )
 
-      idle.play()
+    const currentAnimation = this.animations[0]
+    if (currentAnimation) {
+      currentAnimation.action.play()
+    }
+  }
+
+  private Onload(
+    animName: string,
+    anim: THREE.Group,
+    mixer: THREE.AnimationMixer
+  ) {
+    const clip = anim.animations[0]
+    const action = mixer.clipAction(clip)
+
+    //action.play()
+
+    this.animations.push({
+      clip: clip,
+      action: action,
+      name: animName,
     })
   }
 }

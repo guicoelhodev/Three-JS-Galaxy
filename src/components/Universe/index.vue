@@ -84,7 +84,8 @@ onMounted(() => {
     false
   )
 
-  console.log(keysPressed)
+  // console.log(keysPressed)
+  console.log(astronautModel.animations)
 
   // addEventListener('keydown', (e) => {
   //   const moveCharacter = () => {
