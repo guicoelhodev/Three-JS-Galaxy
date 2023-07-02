@@ -1,0 +1,11 @@
+Model Information:
+* title:	Space exploration [WLP series #8]
+* source:	https://sketchfab.com/3d-models/space-exploration-wlp-series-8-91964c1ce1a34c3985b6257441efa500
+* author:	drei.lu (https://sketchfab.com/drei.lu)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Space exploration [WLP series #8]" (https://sketchfab.com/3d-models/space-exploration-wlp-series-8-91964c1ce1a34c3985b6257441efa500) by drei.lu (https://sketchfab.com/drei.lu) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
