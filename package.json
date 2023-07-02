@@ -12,6 +12,10 @@
     "@nuxt/devtools": "latest",
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@types/node": "^18",
+    "@types/three": "^0.152.1",
     "nuxt": "^3.6.1"
+  },
+  "dependencies": {
+    "three": "^0.154.0"
   }
 }
