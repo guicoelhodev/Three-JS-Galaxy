@@ -1,16 +1,20 @@
 import * as THREE from 'three'
 
-export default class Startship {
+export class StarsShip {
   starGeometry = new THREE.BufferGeometry()
-
   startMaterial = new THREE.PointsMaterial({
     color: 0xffffff,
   })
   startVertices: number[] = []
+  starsMesh: THREE.Points
+  scene: THREE.Scene
 
-  starsMesh = new THREE.Points(this.starGeometry, this.startMaterial)
+  constructor(scene: THREE.Scene) {
+    this.scene = scene
+    this.starsMesh = new THREE.Points(this.starGeometry, this.startMaterial)
+  }
 
-  createStarGalaxy() {
+  load() {
     for (let i = 0; i < 6000; i++) {
       const x = (Math.random() - 0.5) * 2000
       const y = (Math.random() - 0.5) * 2000
@@ -24,6 +28,6 @@ export default class Startship {
       new THREE.Float32BufferAttribute(this.startVertices, 3)
     )
 
-    return { starsMesh: this.starsMesh }
+    this.scene.add(this.starsMesh)
   }
 }
