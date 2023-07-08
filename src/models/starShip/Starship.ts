@@ -15,10 +15,10 @@ export class StarsShip {
   }
 
   load() {
-    for (let i = 0; i < 6000; i++) {
-      const x = (Math.random() - 0.5) * 2000
-      const y = (Math.random() - 0.5) * 2000
-      const z = (Math.random() - 0.5) * 2000
+    for (let i = 0; i < 14000; i++) {
+      const x = (Math.random() - 0.5) * 4000
+      const y = (Math.random() - 0.5) * 4000
+      const z = (Math.random() - 0.5) * 4000
 
       this.startVertices.push(x, y, z)
     }
