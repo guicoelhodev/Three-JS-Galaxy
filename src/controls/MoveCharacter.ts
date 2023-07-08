@@ -46,19 +46,40 @@ export class MoveCharacter {
       duration: 1,
     })
 
-    // gsap.to(this.camera.position, {
-    //   y: 3,
-    //   // ease: 'power3.inOut',
-    //   duration: 1,
-    //   delay: 10,
-    // })
+    gsap.to(this.camera.position, {
+      y: 31,
+      z: 0.5,
+      duration: 2,
+      delay: 2.5,
+    })
 
-    // gsap.to(this.camera.position, {
-    //   z: -1000,
-    //   // ease: 'power3.inOut',
-    //   duration: 1,
-    //   delay: 2,
-    // })
+    gsap.to(this.camera.position, {
+      z: -1000.5,
+      delay: 8,
+      duration: 1,
+    })
+  }
+
+  private navigateAstronaut() {
+    if (!this.astronaut) return
+
+    gsap.to(this.astronaut.position, {
+      y: 30,
+      duration: 2,
+      delay: 2.5,
+    })
+
+    gsap.to(this.astronaut.rotation, {
+      z: 0,
+      duration: 1,
+      delay: 1,
+    })
+
+    gsap.to(this.astronaut.position, {
+      z: -1001,
+      delay: 8,
+      duration: 1,
+    })
   }
 
   private moveAstronaut(
@@ -99,22 +120,39 @@ export class MoveCharacter {
     breathingCliper.play()
 
     // animation load 4
-    const jumpAnimAction = animations.filter((i) => i.name === 'jump')[0]
+
+    const jumpAnimAction = animations.filter((i) => i.name === 'jumping')[0]
       .animations[0]
 
     const jumpAnimCliper = mixer.clipAction(jumpAnimAction)
 
     jumpAnimCliper.crossFadeFrom(breathingCliper, 1, true)
+
+    jumpAnimCliper.setDuration(5)
+
     jumpAnimCliper.loop = THREE.LoopOnce
 
-    jumpAnimCliper.play()
+    jumpAnimCliper.weight = 0.6
 
-    jumpAnimCliper.setDuration(6)
+    jumpAnimCliper.play()
+    // jumpAnimCliper.setDuration(2)
 
     mixer.addEventListener('finished', (e) => {
       console.log(e)
+      // animation load 4
+      // mixer.stopAllAction()
+      const flyingAnimAction = animations.filter((i) => i.name === 'flying')[0]
+        .animations[0]
+
+      const flyingAnimCliper = mixer.clipAction(flyingAnimAction)
+
+      // flyingAnimCliper.timeScale = 20
+      flyingAnimCliper.crossFadeFrom(jumpAnimCliper, 0.2, true)
+
+      flyingAnimCliper.play()
     })
 
+    this.navigateAstronaut()
     // breathingCliper.play()
     // gsap.to(this.astronaut.position, {
     //   y: 2,

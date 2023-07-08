@@ -73,3 +73,9 @@ onMounted(async () => {
 </script>
 
 <template></template>
+
+<style>
+html {
+  overflow: hidden;
+}
+</style>

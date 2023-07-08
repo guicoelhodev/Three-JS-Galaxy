@@ -1,6 +1,5 @@
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 import * as THREE from 'three'
-import { IAstronautAnimations } from '@/types/types'
 
 type IAnimation = {
   clip: THREE.AnimationClip
@@ -46,7 +45,8 @@ export class AstronautModel {
       'breathing.fbx',
       'sitted.fbx',
       'standingUp.fbx',
-      'jump.fbx',
+      'jumping.fbx',
+      'flying.fbx',
     ]
 
     for await (let anim of relativeAnimPaths) {
