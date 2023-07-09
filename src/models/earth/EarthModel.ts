@@ -12,8 +12,8 @@ export class EarthModel {
   load() {
     this.glftLoader.load('../../assets/earth/scene.gltf', (gltfScene) => {
       gltfScene.scene.position.x = -3.8
-      gltfScene.scene.position.y = 3.4
-      gltfScene.scene.position.z = -4.4
+      gltfScene.scene.position.y = 35
+      gltfScene.scene.position.z = -1004
       gltfScene.scene.rotation.x = 0.2
 
       gltfScene.scene.scale.set(0.002, 0.002, 0.002)

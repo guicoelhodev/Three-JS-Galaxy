@@ -6,7 +6,7 @@ export class Galaxy {
   scene = new THREE.Scene()
 
   renderer = new THREE.WebGLRenderer()
-
+  orbitControls?: OrbitControls
   light = new THREE.DirectionalLight(0xffffff, 1)
   lightUp = new THREE.DirectionalLight(0xffffff, 1)
 
@@ -15,7 +15,11 @@ export class Galaxy {
   }
 
   private create3dSpace = () => {
-    new OrbitControls(this.camera, this.renderer.domElement)
+    let orbitControl = new OrbitControls(this.camera, this.renderer.domElement)
+
+    console.log(orbitControl)
+
+    orbitControl.enabled = false
     this.renderer.setSize(window.innerWidth, window.innerHeight)
     document.body.appendChild(this.renderer.domElement)
 

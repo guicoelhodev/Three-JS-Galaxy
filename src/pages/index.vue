@@ -29,9 +29,9 @@ onMounted(async () => {
   const astronautModel = new AstronautModel(scene)
 
   starshipModel.load()
-  // earthModel.load()
+  earthModel.load()
   marsModel.load()
-  // rocketModel.load()
+  rocketModel.load()
   const astronautFbx = await astronautModel.load()
   const { animations } = await astronautModel.loadAllAnimations()
 
@@ -64,6 +64,7 @@ onMounted(async () => {
     if (!astronautModel.mixer) return
 
     astronautModel.mixer.update(clock.getDelta())
+    moveCharacter.moveCameraKeyBoard()
 
     // moveCharacter.moveCamera()
   }

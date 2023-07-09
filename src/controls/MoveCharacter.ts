@@ -2,6 +2,7 @@ import { ICamera, IScene } from '@/types/types'
 import * as THREE from 'three'
 
 import gsap from 'gsap'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 export class MoveCharacter {
   keys = {
@@ -33,7 +34,7 @@ export class MoveCharacter {
   constructor(aCamera: ICamera, astronautModel: THREE.Group) {
     this.camera = aCamera
     this.astronaut = astronautModel
-    // this.eventListener()
+    this.eventListener()
   }
 
   private moveCamera() {
@@ -50,12 +51,12 @@ export class MoveCharacter {
       y: 31,
       z: 0.5,
       duration: 2,
-      delay: 2.5,
+      delay: 2.2,
     })
 
     gsap.to(this.camera.position, {
       z: -1000.5,
-      delay: 8,
+      delay: 4,
       duration: 1,
     })
   }
@@ -66,7 +67,7 @@ export class MoveCharacter {
     gsap.to(this.astronaut.position, {
       y: 30,
       duration: 2,
-      delay: 2.5,
+      delay: 2.2,
     })
 
     gsap.to(this.astronaut.rotation, {
@@ -77,7 +78,7 @@ export class MoveCharacter {
 
     gsap.to(this.astronaut.position, {
       z: -1001,
-      delay: 8,
+      delay: 4,
       duration: 1,
     })
   }
@@ -147,64 +148,12 @@ export class MoveCharacter {
       const flyingAnimCliper = mixer.clipAction(flyingAnimAction)
 
       // flyingAnimCliper.timeScale = 20
-      flyingAnimCliper.crossFadeFrom(jumpAnimCliper, 0.2, true)
+      flyingAnimCliper.crossFadeFrom(jumpAnimCliper, 0.5, true)
 
       flyingAnimCliper.play()
     })
 
     this.navigateAstronaut()
-    // breathingCliper.play()
-    // gsap.to(this.astronaut.position, {
-    //   y: 2,
-    //   duration: 1,
-    //   delay: 2,
-    // })
-
-    // let standingClip = standingUpFbx.animation.animations[0]
-
-    // standingClip = {
-    //   ...standingClip,
-    //   name: standingUpFbx.name,
-    // } as THREE.AnimationClip
-
-    // let standingAction = mixer.clipAction(standingClip)
-
-    // let breathingClip = breathing.animation.animations[0]
-    // let breathingAction = mixer.clipAction(breathingClip)
-
-    // standingAction.loop = THREE.LoopOnce
-
-    // mixer.stopAllAction()
-    // // standingAction.weight = 1
-    // // standingAction.fadeIn(0.5)
-
-    // standingAction.play()
-
-    // mixer.addEventListener('finished', (e) => {
-    //   if (e.action._clip.name === 'standingUp') {
-    //     // standingAction.stop()
-    //     // breathingAction.crossFadeFrom(standingAction, 1, true)
-    //     breathingAction.play()
-    //   }
-    // })
-
-    // mixer.addEventListener('finished', (e: any) => {
-    //   // window.alert('Show')
-    //   // breathingAction.reset()
-    //   breathingAction.play()
-    //   console.log(e)
-    // })
-
-    // clip = breathing.animation.animations[0]
-
-    // action = mixer.clipAction(clip)
-    // action.play()
-
-    // gsap.to(this.astronaut.position, {
-    //   z: -1001,
-    //   delay: 2,
-    //   duration: 1,
-    // })
   }
 
   flyingAnimation(
@@ -224,84 +173,74 @@ export class MoveCharacter {
       this.moveCamera()
 
       moveAstronautFn()
+
+      // orbit.update()
     })
   }
-  // eventListener() {
-  //   window.addEventListener('keydown', (event) => {
-  //     console.log(event.code)
-  //     switch (event.key) {
-  //       case 'w': {
-  //         this.keys.w.pressed = true
-  //         break
-  //       }
-  //       case 'a': {
-  //         this.keys.a.pressed = true
-  //         break
-  //       }
-  //       case 's': {
-  //         this.keys.s.pressed = true
-  //         break
-  //       }
-  //       case 'd': {
-  //         this.keys.d.pressed = true
-  //         break
-  //       }
-  //       case ' ': {
-  //         this.keys.space.pressed = true
-  //       }
-  //       case 'Shift': {
-  //         this.keys.shift.pressed = true
-  //       }
-  //     }
-  //   })
+  eventListener() {
+    window.addEventListener('keydown', (event) => {
+      console.log(event.code)
+      switch (event.key) {
+        case 'w': {
+          this.keys.w.pressed = true
+          break
+        }
+        case 'a': {
+          this.keys.a.pressed = true
+          break
+        }
+        case 's': {
+          this.keys.s.pressed = true
+          break
+        }
+        case 'd': {
+          this.keys.d.pressed = true
+          break
+        }
+        case ' ': {
+          this.keys.space.pressed = true
+        }
+        case 'Shift': {
+          this.keys.shift.pressed = true
+        }
+      }
+    })
 
-  //   window.addEventListener('keyup', (event) => {
-  //     switch (event.key) {
-  //       case 'w': {
-  //         this.keys.w.pressed = false
-  //         break
-  //       }
-  //       case 'a': {
-  //         this.keys.a.pressed = false
-  //         break
-  //       }
-  //       case 's': {
-  //         this.keys.s.pressed = false
-  //         break
-  //       }
-  //       case 'd': {
-  //         this.keys.d.pressed = false
-  //         break
-  //       }
-  //       case ' ': {
-  //         this.keys.space.pressed = false
-  //       }
-  //       case 'Shift': {
-  //         this.keys.shift.pressed = false
-  //       }
-  //     }
-  //   })
-  // }
+    window.addEventListener('keyup', (event) => {
+      switch (event.key) {
+        case 'w': {
+          this.keys.w.pressed = false
+          break
+        }
+        case 'a': {
+          this.keys.a.pressed = false
+          break
+        }
+        case 's': {
+          this.keys.s.pressed = false
+          break
+        }
+        case 'd': {
+          this.keys.d.pressed = false
+          break
+        }
+      }
+    })
+  }
 
-  // moveCamera() {
-  //   if (!this.camera) return
-  //   if (this.keys.w.pressed) {
-  //     this.camera.position.z -= 0.1
-  //   }
-  //   if (this.keys.s.pressed) {
-  //     this.camera.position.z += 0.1
-  //   }
-  //   if (this.keys.a.pressed) {
-  //     this.camera.rotateY(0.01)
-  //   }
-  //   if (this.keys.d.pressed) {
-  //     this.camera.rotateY(-0.01)
-  //   }
-  //   if (this.keys.space.pressed) {
-  //     this.camera.position.y += 0.1
-  //   }
-  //   if (this.keys.shift.pressed) {
-  //     this.camera.position.y -= 0.04
-  //   }
-  // }
+  moveCameraKeyBoard() {
+    if (!this.camera) return
+    if (this.keys.w.pressed) {
+      this.camera.rotation.x += 0.02
+    }
+    if (this.keys.s.pressed) {
+      this.camera.rotation.x -= 0.02
+    }
+    if (this.keys.a.pressed) {
+      this.camera.rotateY(0.02)
+    }
+    if (this.keys.d.pressed) {
+      this.camera.rotateY(-0.02)
+    }
+  }
 }

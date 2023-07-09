@@ -11,8 +11,8 @@ export class RocketModel {
   load() {
     this.glftLoader.load('../../assets/rocket/scene.gltf', (gltfScene) => {
       gltfScene.scene.position.x = 3.4
-      gltfScene.scene.position.y = 3.4
-      gltfScene.scene.position.z = -4
+      gltfScene.scene.position.y = 30
+      gltfScene.scene.position.z = -1000
       gltfScene.scene.rotation.x = 0.5
 
       gltfScene.scene.scale.set(0.1, 0.1, 0.1)
