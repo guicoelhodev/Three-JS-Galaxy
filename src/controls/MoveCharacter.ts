@@ -49,14 +49,14 @@ export class MoveCharacter {
 
     gsap.to(this.camera.position, {
       y: 31,
-      z: 0.5,
+      z: 0,
       duration: 2,
       delay: 2.2,
     })
 
     gsap.to(this.camera.position, {
       z: -1000.5,
-      delay: 4,
+      delay: 4.5,
       duration: 1,
     })
   }
@@ -77,8 +77,8 @@ export class MoveCharacter {
     })
 
     gsap.to(this.astronaut.position, {
-      z: -1001,
-      delay: 4,
+      z: -1000,
+      delay: 4.5,
       duration: 1,
     })
   }
@@ -230,12 +230,12 @@ export class MoveCharacter {
 
   moveCameraKeyBoard() {
     if (!this.camera) return
-    if (this.keys.w.pressed) {
-      this.camera.rotation.x += 0.02
-    }
-    if (this.keys.s.pressed) {
-      this.camera.rotation.x -= 0.02
-    }
+    // if (this.keys.w.pressed) {
+    //   this.camera.rotation.x += 0.02
+    // }
+    // if (this.keys.s.pressed) {
+    //   this.camera.rotation.x -= 0.02
+    // }
     if (this.keys.a.pressed) {
       this.camera.rotateY(0.02)
     }
