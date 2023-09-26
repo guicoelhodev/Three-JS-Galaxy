@@ -1,7 +1,8 @@
-<script setup>
+<script setup lang="ts">
 import * as THREE from 'three'
 import { onMounted } from 'vue'
 import { Icon } from '@iconify/vue'
+import { gsap } from 'gsap'
 
 // imports planets and astronaut
 
@@ -15,8 +16,35 @@ import { Galaxy } from '@/controls/Galaxy'
 import { MoveCharacter } from '@/controls/MoveCharacter'
 
 const componentWasMounted = ref(false)
+const initialMesage: { msg: string; delay: number }[] = [
+  {
+    msg: "Hi, I'm Guilherme Coelho",
+    delay: 3000,
+  },
+  {
+    msg: "I'm work as front-end developer",
+    delay: 8000,
+  },
+  {
+    msg: 'Welcome to my galaxy',
+    delay: 14000,
+  },
+]
 
 onMounted(async () => {
+  gsap.fromTo(
+    '.show',
+    { autoAlpha: 0 },
+    {
+      autoAlpha: 1,
+      duration: 2,
+      delay: 17,
+      onComplete: () => {
+        gsap.to('.show', { autoAlpha: 0, duration: 1, delay: 2 })
+      },
+    }
+  )
+
   const galaxy = new Galaxy()
 
   const scene = galaxy.scene
@@ -48,8 +76,8 @@ onMounted(async () => {
     if (!planets) return
     if (planets.some((i) => i)) {
       planets.forEach((planet) => {
-        planet.scene.rotation.y += 0.001
-        planet.scene.rotation.x += 0.0001
+        planet!.scene.rotation.y += 0.001
+        planet!.scene.rotation.x += 0.0001
       })
     }
   }
@@ -73,8 +101,6 @@ onMounted(async () => {
   }
 
   animate()
-
-  componentWasMounted.value = true
 })
 </script>
 
@@ -83,36 +109,35 @@ onMounted(async () => {
     :v-if="componentWasMounted"
     class="absolute inset-0 flex items-center justify-center"
   >
-    <TypeWritter
-      msg="Hi, I'm Guilherme Coelho"
-      :delayTime="3000"
-      classname="text-4xl text-cyan-400 font-bold"
-    />
+    <ul class="relative" v-for="message in initialMesage" :key="message.msg">
+      <TypeWritter
+        :msg="message.msg"
+        :delayTime="message.delay"
+        classname="text-4xl text-cyan-400 font-bold"
+      />
+    </ul>
 
-    <TypeWritter
-      msg="I'm work as front-end developer"
-      :delayTime="8000"
-      classname="text-4xl font-bold text-pink-400"
-    />
-
-    <TypeWritter
-      msg="Welcome to my galaxy"
-      :delayTime="14000"
-      classname="text-6xl font-bold"
-      fix-content="true"
-    />
-    <!-- <article
-      id="space_container"
-      class="flex flex-col items-center justify-center gap-2"
-    >
-      <p class="text-white text-3xl">Press space to begin</p>
-      <Icon icon="tabler:space" color="white" width="68" height="68" />
-    </article> -->
+    <div class="show" :v-if="componentWasMounted">
+      <article
+        id="space_container"
+        class="flex flex-col items-center justify-center gap-2"
+      >
+        <p class="text-white text-3xl">Press space to begin</p>
+        <Icon icon="tabler:space" color="white" width="68" height="68" />
+      </article>
+    </div>
   </div>
 </template>
 
 <style>
 html {
   overflow: hidden;
+}
+
+.show {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>
