@@ -1,25 +1,27 @@
-import { TypeWritter } from '../../../.nuxt/components'; d
 <template>
   <div>
-    <span
-      class="text-white text-2xl"
-      v-for="(char, index) in text"
-      :key="index"
-    >
+    <span :class="className" v-for="(char, index) in text" :key="index">
       {{ char }}
     </span>
   </div>
 </template>
 
 <script setup lang="ts">
+import { defineProps, onMounted, onUnmounted, ref } from 'vue'
+
 const props = defineProps({
   msg: String,
   delayTime: Number,
+  classname: String,
 })
 
 const text = ref('')
 const message = props.msg ?? ''
 const speed = 100
+const className = `text-white ${props.classname}`
+
+let typeTimeout: NodeJS.Timeout | null = null
+let removeTimeout: NodeJS.Timeout | null = null
 
 const typewriterEffect = () => {
   let i = 0
@@ -28,16 +30,17 @@ const typewriterEffect = () => {
     if (i >= 0) {
       text.value = text.value.slice(0, -1) // Remove the last character from the text
       i--
-      setTimeout(remove, speed)
+      removeTimeout = setTimeout(remove, speed)
     }
   }
+
   const type = () => {
     if (i < message.length) {
       text.value += message.charAt(i)
       i++
-      setTimeout(type, speed)
+      typeTimeout = setTimeout(type, speed)
     } else {
-      setTimeout(remove, speed)
+      removeTimeout = setTimeout(remove, speed)
     }
   }
 
@@ -45,6 +48,12 @@ const typewriterEffect = () => {
 }
 
 onMounted(() => {
-  setTimeout(() => typewriterEffect(), props.delayTime)
+  typeTimeout = setTimeout(() => typewriterEffect(), props.delayTime)
+})
+
+// Clear the timeouts when the component is unmounted
+onUnmounted(() => {
+  if (typeTimeout) clearTimeout(typeTimeout)
+  if (removeTimeout) clearTimeout(removeTimeout)
 })
 </script>
