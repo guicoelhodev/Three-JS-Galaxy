@@ -32,18 +32,9 @@ const initialMesage: { msg: string; delay: number }[] = [
 ]
 
 onMounted(async () => {
-  gsap.fromTo(
-    '.show',
-    { autoAlpha: 0 },
-    {
-      autoAlpha: 1,
-      duration: 2,
-      delay: 17,
-      onComplete: () => {
-        gsap.to('.show', { autoAlpha: 0, duration: 1, delay: 2 })
-      },
-    }
-  )
+
+  fadeIn('.info-1', 17)
+  
 
   const galaxy = new Galaxy()
 
@@ -117,7 +108,7 @@ onMounted(async () => {
       />
     </ul>
 
-    <div class="show" :v-if="componentWasMounted">
+    <div class="info-1" :v-if="componentWasMounted">
       <article
         id="space_container"
         class="flex flex-col items-center justify-center gap-2"
