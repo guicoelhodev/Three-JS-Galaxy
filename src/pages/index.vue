@@ -27,13 +27,14 @@ const initialMesage: { msg: string; delay: number }[] = [
   },
   {
     msg: 'Welcome to my galaxy',
-    delay: 14000,
+    delay: 14500,
   },
 ]
 
 onMounted(async () => {
 
-  fadeIn('.info-1', 17)
+  fadeIn('.info-1', true, 17);
+  fadeIn('.info-2', false, 28);
   
 
   const galaxy = new Galaxy()
@@ -98,7 +99,7 @@ onMounted(async () => {
 <template>
   <div
     :v-if="componentWasMounted"
-    class="absolute inset-0 flex items-center justify-center"
+    class="w-full absolute inset-0 flex items-center justify-center"
   >
     <ul class="relative" v-for="message in initialMesage" :key="message.msg">
       <TypeWritter
@@ -108,7 +109,7 @@ onMounted(async () => {
       />
     </ul>
 
-    <div class="info-1" :v-if="componentWasMounted">
+    <section class="info-1 centerDiv" :v-if="componentWasMounted">
       <article
         id="space_container"
         class="flex flex-col items-center justify-center gap-2"
@@ -116,7 +117,12 @@ onMounted(async () => {
         <p class="text-white text-3xl">Press space to begin</p>
         <Icon icon="tabler:space" color="white" width="68" height="68" />
       </article>
-    </div>
+    </section>
+
+    <section class="info-2 centerDiv flex flex-col items-center gap-2">
+      <p class="text-white text-2xl font-semibold">Use 'A' or 'D' to looking around</p>
+      <p class="text-white text-2xl font-semibold">Use 'W' or 'S' to move the astronaut</p>
+    </section>
   </div>
 </template>
 
@@ -125,7 +131,7 @@ html {
   overflow: hidden;
 }
 
-.show {
+.centerDiv {
   position: absolute;
   top: 50%;
   left: 50%;
