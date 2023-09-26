@@ -1,6 +1,7 @@
 import gsap from 'gsap'
 export const fadeIn = (
   className: string,
+  hiddenOnComplete: boolean,
   delayArg?: number,
   durationArg?: number
 ) => {
@@ -15,7 +16,9 @@ export const fadeIn = (
       duration: duration,
       delay: delay,
       onComplete: () => {
-        gsap.to(className, { autoAlpha: 0, duration: 1, delay: 2 })
+        hiddenOnComplete
+          ? gsap.to(className, { autoAlpha: 0, duration: 1, delay: 2 })
+          : null
       },
     }
   )
