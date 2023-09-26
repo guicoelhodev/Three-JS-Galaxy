@@ -13,11 +13,12 @@ const props = defineProps({
   msg: String,
   delayTime: Number,
   classname: String,
+  fixContent: Boolean,
 })
 
 const text = ref('')
 const message = props.msg ?? ''
-const speed = 100
+const speed = 90
 const className = `text-white ${props.classname}`
 
 let typeTimeout: NodeJS.Timeout | null = null
@@ -39,7 +40,7 @@ const typewriterEffect = () => {
       text.value += message.charAt(i)
       i++
       typeTimeout = setTimeout(type, speed)
-    } else {
+    } else if (!props.fixContent) {
       removeTimeout = setTimeout(remove, speed)
     }
   }

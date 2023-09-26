@@ -85,29 +85,29 @@ onMounted(async () => {
   >
     <TypeWritter
       msg="Hi, I'm Guilherme Coelho"
-      :delayTime="2000"
-      classname="text-4xl"
+      :delayTime="3000"
+      classname="text-4xl text-cyan-400 font-bold"
     />
 
     <TypeWritter
       msg="I'm work as front-end developer"
-      :delayTime="9000"
-      classname="text-4xl text-cyan-400 font-semibold"
+      :delayTime="8000"
+      classname="text-4xl font-bold text-pink-400"
     />
 
     <TypeWritter
       msg="Welcome to my galaxy"
-      :delayTime="15000"
+      :delayTime="14000"
       classname="text-6xl font-bold"
+      fix-content="true"
     />
-
-    <article
+    <!-- <article
       id="space_container"
       class="flex flex-col items-center justify-center gap-2"
     >
       <p class="text-white text-3xl">Press space to begin</p>
       <Icon icon="tabler:space" color="white" width="68" height="68" />
-    </article>
+    </article> -->
   </div>
 </template>
 
