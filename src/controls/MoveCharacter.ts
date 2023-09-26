@@ -43,7 +43,6 @@ export class MoveCharacter {
     gsap.to(this.camera.position, {
       z: 3,
       y: -2,
-      // ease: 'power3.inOut',
       duration: 1,
     })
 
@@ -230,12 +229,12 @@ export class MoveCharacter {
 
   moveCameraKeyBoard() {
     if (!this.camera) return
-    // if (this.keys.w.pressed) {
-    //   this.camera.rotation.x += 0.02
-    // }
-    // if (this.keys.s.pressed) {
-    //   this.camera.rotation.x -= 0.02
-    // }
+    if (this.keys.w.pressed) {
+      this.camera.position.z -= 0.04
+    }
+    if (this.keys.s.pressed) {
+      this.camera.position.z += 0.04
+    }
     if (this.keys.a.pressed) {
       this.camera.rotateY(0.02)
     }
