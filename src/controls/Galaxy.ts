@@ -1,12 +1,12 @@
 import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 export class Galaxy {
   camera = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 1000)
   scene = new THREE.Scene()
 
   renderer = new THREE.WebGLRenderer()
-  orbitControls?: OrbitControls
+  // orbitControls?: OrbitControls
   light = new THREE.DirectionalLight(0xffffff, 1)
   lightUp = new THREE.DirectionalLight(0xffffff, 1)
 
@@ -14,12 +14,8 @@ export class Galaxy {
     this.build()
   }
 
+
   private create3dSpace = () => {
-    let orbitControl = new OrbitControls(this.camera, this.renderer.domElement)
-
-    console.log(orbitControl)
-
-    orbitControl.enabled = false
     this.renderer.setSize(window.innerWidth, window.innerHeight)
     document.body.appendChild(this.renderer.domElement)
 

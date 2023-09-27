@@ -5,17 +5,17 @@ import { useViewStore } from '@/store/useViewStore';
 const viewStore = useViewStore();
 
 watch(() => viewStore.axisZ, () => {
-  console.log(viewStore.axisZ);
+  console.table({ axisZ: viewStore.axisZ, messageCode: messageTypeCode.value });
 });
 
 const messageTypeCode = computed(() => {
   const enumValues = Object.values(axisZEnum);
 
-  for (const value of enumValues){
-    if(viewStore.axisZ !== value) continue;
-    return value; 
-  }
-  return 0;
+  // for (const value of enumValues){
+  //   // if(viewStore.axisZ !== value) continue;
+  //   return value; 
+  // }
+  return viewStore.axisZ;
 })
 
 // watch(messageTypeCode, () => {
@@ -42,8 +42,7 @@ onMounted(() => {
       <Icon icon="tabler:space" color="white" width="68" height="68" />
     </article>
   </section> -->
-
-  <section v-if="messageTypeCode === axisZEnum.moveText" class="info-2 centerDiv flex flex-col items-center gap-2">
+  <section v-if="messageTypeCode < axisZEnum.moveText && messageTypeCode > axisZEnum.webStack" class="info-2 centerDiv flex flex-col items-center gap-2">
     <p class="text-white text-2xl font-semibold">
       Use 'A' or 'D' to looking around
     </p>
@@ -52,13 +51,13 @@ onMounted(() => {
     </p>
   </section>
 
-  <section v-if="messageTypeCode === axisZEnum.webStack" class="info-2 centerDiv flex flex-col items-center gap-2">
+  <section v-if="messageTypeCode < axisZEnum.webStack && messageTypeCode > axisZEnum.projects" class="info-2 centerDiv flex flex-col items-center gap-2">
     <p class="text-white text-2xl font-semibold">
       Thats my stacks
     </p>
   </section>
 
-  <section v-if="messageTypeCode === axisZEnum.projects" class="info-2 centerDiv flex flex-col items-center gap-2">
+  <section v-if="messageTypeCode < axisZEnum.projects && messageTypeCode > -2000" class="info-2 centerDiv flex flex-col items-center gap-2">
     <p class="text-white text-2xl font-semibold">
       Thats my projects
     </p>

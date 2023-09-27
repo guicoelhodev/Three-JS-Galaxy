@@ -48,7 +48,7 @@ export class MoveCharacter {
 
     gsap.to(this.camera.position, {
       y: 31,
-      //z: 0,
+      z: 0,
       duration: 2,
       delay: 2.2,
     })
@@ -76,12 +76,12 @@ export class MoveCharacter {
       delay: 1,
     })
 
-     gsap.to(this.astronaut.rotation, {
-      z: 0,
-      // x: -4.5,
-      duration: 3,
-      delay: 2.2,
-    })
+    //  gsap.to(this.astronaut.rotation, {
+    //   z: 0,
+    //   // x: -4.5,
+    //   duration: 3,
+    //   delay: 2.2,
+    // })
     
     //  gsap.to(this.astronaut.rotation, {
     //   z: 0,
@@ -91,11 +91,11 @@ export class MoveCharacter {
     // })
  
 
-    // gsap.to(this.astronaut.position, {
-    //   z: -601.1,
-    //   delay: 4.5,
-    //   duration: 1,
-    // })
+    gsap.to(this.astronaut.position, {
+      z: -600,
+      delay: 4.5,
+      duration: 1,
+    })
   }
 
   private moveAstronaut(

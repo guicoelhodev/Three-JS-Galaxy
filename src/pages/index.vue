@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import * as THREE from 'three'
 import { onMounted } from 'vue'
-import { Icon } from '@iconify/vue'
-import { gsap } from 'gsap'
+
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 // imports planets and astronaut
 
@@ -59,6 +59,14 @@ onMounted(async () => {
   const astronautFbx = await astronautModel.load()
   const { animations } = await astronautModel.loadAllAnimations()
 
+  let orbitControl = new OrbitControls(camera, renderer.domElement)
+
+    console.log('AA:',orbitControl)
+
+    orbitControl.enabled = true
+    // orbitControl.target.set(0, 0, -20)
+    orbitControl.update()
+
   // make 3d camera move
 
   const moveCharacter = new MoveCharacter(camera, astronautFbx)
@@ -78,6 +86,7 @@ onMounted(async () => {
   moveCharacter.flyingAnimation(animations, astronautModel.mixer)
   // animate framers
   const clock = new THREE.Clock()
+  //galaxy.orbitControls?.target.set(camera.position.x, camera.position.y, camera.position.z);
 
   const animate = () => {
     requestAnimationFrame(animate)
@@ -90,9 +99,20 @@ onMounted(async () => {
     astronautModel.mixer.update(clock.getDelta())
     moveCharacter.moveCameraKeyBoard(viewStore.axisZ ,viewStore.handleAxisZ)
 
+    
+    // galaxy.orbitControls?.position0.copy(new THREE.Vector3(camera.position.x, camera.position.y, camera.position.z));
+    // galaxy.orbitControls?.position0.copy(camera.position);
+    
+    const position = moveCharacter.astronaut?.position;
+    if(!position)return;
+
+    orbitControl.target.set(position.x, position.y + 0.5, position.z + 0.5);
+    //orbitControl.update()
+    
     // moveCharacter.moveCamera()
   }
 
+    
   animate()
 })
 </script>
@@ -100,7 +120,8 @@ onMounted(async () => {
 <template>
   <div
     :v-if="componentWasMounted"
-    class="w-full absolute inset-0 flex items-center justify-center"
+    class="absolute inset-0 flex items-center justify-center"
+    style="pointer-events: none;"
   >
     <!-- <ul class="relative" v-for="message in initialMesage" :key="message.msg">
       <TypeWritter
