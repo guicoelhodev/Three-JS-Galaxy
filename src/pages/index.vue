@@ -14,8 +14,11 @@ import { RocketModel } from '@/models/rocket/RocketModel'
 import { AstronautModel } from '@/models/astronaut/Astronaut'
 import { Galaxy } from '@/controls/Galaxy'
 import { MoveCharacter } from '@/controls/MoveCharacter'
+import { useViewStore } from '@/store/useViewStore'
 
-const componentWasMounted = ref(false)
+const componentWasMounted = ref(false);
+
+const viewStore = useViewStore();
 const initialMesage: { msg: string; delay: number }[] = [
   {
     msg: "Hi, I'm Guilherme Coelho",
@@ -30,6 +33,11 @@ const initialMesage: { msg: string; delay: number }[] = [
     delay: 14500,
   },
 ]
+
+
+watch(() => viewStore.axisZ, () => {
+  console.log(viewStore.axisZ);
+});
 
 onMounted(async () => {
 
@@ -87,7 +95,7 @@ onMounted(async () => {
     if (!astronautModel.mixer) return
 
     astronautModel.mixer.update(clock.getDelta())
-    moveCharacter.moveCameraKeyBoard()
+    moveCharacter.moveCameraKeyBoard(viewStore.axisZ ,viewStore.handleAxisZ)
 
     // moveCharacter.moveCamera()
   }
