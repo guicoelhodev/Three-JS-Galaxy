@@ -7,7 +7,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, onMounted, onUnmounted, ref } from 'vue'
 
 const props = defineProps({
   msg: String,
