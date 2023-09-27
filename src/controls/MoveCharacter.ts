@@ -48,13 +48,13 @@ export class MoveCharacter {
 
     gsap.to(this.camera.position, {
       y: 31,
-      z: 0,
+      //z: 0,
       duration: 2,
       delay: 2.2,
     })
 
     gsap.to(this.camera.position, {
-      z: -1000.5,
+      z: -601,
       delay: 4.5,
       duration: 1,
     })
@@ -71,15 +71,31 @@ export class MoveCharacter {
 
     gsap.to(this.astronaut.rotation, {
       z: 0,
+      // x: ,
       duration: 1,
       delay: 1,
     })
 
-    gsap.to(this.astronaut.position, {
-      z: -1000,
-      delay: 4.5,
-      duration: 1,
+     gsap.to(this.astronaut.rotation, {
+      z: 0,
+      // x: -4.5,
+      duration: 3,
+      delay: 2.2,
     })
+    
+    //  gsap.to(this.astronaut.rotation, {
+    //   z: 0,
+    //   x: -5.5,
+    //   duration: 1,
+    //   delay: 4.2,
+    // })
+ 
+
+    // gsap.to(this.astronaut.position, {
+    //   z: -601.1,
+    //   delay: 4.5,
+    //   duration: 1,
+    // })
   }
 
   private moveAstronaut(
@@ -232,20 +248,20 @@ export class MoveCharacter {
 
    moveCameraKeyBoard(prevAxisZ: number, handleAxisZ: (arg: number) => void) {
 
-    if (!this.camera) return
+    if (!this.camera || !this.astronaut) return
+    const z = this.getIntegerNumber(this.camera.position.z);
 
     if (this.keys.w.pressed) {
-      this.camera.position.z -= 0.04
+      this.camera.position.z -= 2
+      this.astronaut.position.z -= 2
 
-      const z = this.getIntegerNumber(this.camera.position.z);
 
       if(prevAxisZ === z) return;
       return handleAxisZ(z)
     }
     if (this.keys.s.pressed) {
-      this.camera.position.z += 0.04
-
-      const z = this.getIntegerNumber(this.camera.position.z);
+      this.camera.position.z += 2
+      this.astronaut.position.z += 2
 
       if(prevAxisZ === z) return;
       return handleAxisZ(z)

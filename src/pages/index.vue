@@ -35,15 +35,7 @@ const initialMesage: { msg: string; delay: number }[] = [
 ]
 
 
-watch(() => viewStore.axisZ, () => {
-  console.log(viewStore.axisZ);
-});
-
 onMounted(async () => {
-
-  fadeIn('.info-1', true, 17);
-  fadeIn('.info-2', false, 28);
-  
 
   const galaxy = new Galaxy()
 
@@ -63,6 +55,7 @@ onMounted(async () => {
   earthModel.load()
   marsModel.load()
   rocketModel.load()
+
   const astronautFbx = await astronautModel.load()
   const { animations } = await astronautModel.loadAllAnimations()
 
@@ -76,7 +69,7 @@ onMounted(async () => {
     if (!planets) return
     if (planets.some((i) => i)) {
       planets.forEach((planet) => {
-        planet!.scene.rotation.y += 0.001
+        planet!.scene.rotation.y += 0.01
         planet!.scene.rotation.x += 0.0001
       })
     }
@@ -109,40 +102,21 @@ onMounted(async () => {
     :v-if="componentWasMounted"
     class="w-full absolute inset-0 flex items-center justify-center"
   >
-    <ul class="relative" v-for="message in initialMesage" :key="message.msg">
+    <!-- <ul class="relative" v-for="message in initialMesage" :key="message.msg">
       <TypeWritter
         :msg="message.msg"
         :delayTime="message.delay"
         classname="text-4xl text-cyan-400 font-bold"
       />
-    </ul>
+    </ul> -->
 
-    <section class="info-1 centerDiv" :v-if="componentWasMounted">
-      <article
-        id="space_container"
-        class="flex flex-col items-center justify-center gap-2"
-      >
-        <p class="text-white text-3xl">Press space to begin</p>
-        <Icon icon="tabler:space" color="white" width="68" height="68" />
-      </article>
-    </section>
+    <AxisZMessage />
 
-    <section class="info-2 centerDiv flex flex-col items-center gap-2">
-      <p class="text-white text-2xl font-semibold">Use 'A' or 'D' to looking around</p>
-      <p class="text-white text-2xl font-semibold">Use 'W' or 'S' to move the astronaut</p>
-    </section>
   </div>
 </template>
 
 <style>
 html {
   overflow: hidden;
-}
-
-.centerDiv {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 </style>
