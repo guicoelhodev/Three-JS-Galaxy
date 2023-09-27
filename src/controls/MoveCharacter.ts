@@ -226,14 +226,29 @@ export class MoveCharacter {
       }
     })
   }
+  private getIntegerNumber(number: number){
+    return Math.floor(number)
+  };
 
-  moveCameraKeyBoard() {
+   moveCameraKeyBoard(prevAxisZ: number, handleAxisZ: (arg: number) => void) {
+
     if (!this.camera) return
+
     if (this.keys.w.pressed) {
       this.camera.position.z -= 0.04
+
+      const z = this.getIntegerNumber(this.camera.position.z);
+
+      if(prevAxisZ === z) return;
+      return handleAxisZ(z)
     }
     if (this.keys.s.pressed) {
       this.camera.position.z += 0.04
+
+      const z = this.getIntegerNumber(this.camera.position.z);
+
+      if(prevAxisZ === z) return;
+      return handleAxisZ(z)
     }
     if (this.keys.a.pressed) {
       this.camera.rotateY(0.02)
