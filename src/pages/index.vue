@@ -58,18 +58,21 @@ onMounted(async () => {
 
   const astronautFbx = await astronautModel.load()
   const { animations } = await astronautModel.loadAllAnimations()
+  const moveCharacter = new MoveCharacter(camera, astronautFbx)
 
   let orbitControl = new OrbitControls(camera, renderer.domElement)
 
     console.log('AA:',orbitControl)
+  const position = moveCharacter.astronaut?.position;
+    if(!position)return;
 
+    orbitControl.target.set(position.x, position.y + 0.5, position.z );
     orbitControl.enabled = true
     // orbitControl.target.set(0, 0, -20)
     orbitControl.update()
 
   // make 3d camera move
 
-  const moveCharacter = new MoveCharacter(camera, astronautFbx)
 
   const rotatePlanets = () => {
     const planets = [rocketModel.rocketScene, earthModel.earthScene]
@@ -106,8 +109,8 @@ onMounted(async () => {
     const position = moveCharacter.astronaut?.position;
     if(!position)return;
 
-    orbitControl.target.set(position.x, position.y + 0.5, position.z + 0.5);
-    //orbitControl.update()
+    orbitControl.target.set(position.x, position.y + 1, position.z + 0.5);
+    orbitControl.update()
     
     // moveCharacter.moveCamera()
   }
