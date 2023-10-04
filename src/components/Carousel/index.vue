@@ -7,21 +7,18 @@ import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
 
 const modules = [EffectCoverflow, Pagination]
+const showInfo = ref(false);
 
 const links = [
-  'https://swiperjs.com/demos/images/nature-1.jpg',
-  'https://swiperjs.com/demos/images/nature-2.jpg',
-  'https://swiperjs.com/demos/images/nature-3.jpg',
-  'https://swiperjs.com/demos/images/nature-4.jpg',
-  'https://swiperjs.com/demos/images/nature-5.jpg',
-  'https://swiperjs.com/demos/images/nature-6.jpg',
-  'https://swiperjs.com/demos/images/nature-7.jpg',
-  'https://swiperjs.com/demos/images/nature-8.jpg',
-  'https://swiperjs.com/demos/images/nature-9.jpg',
+  'https://github.com/guicoelhodev/Pokedex-v3/raw/main/github/homepage_2.png',
+  'https://github.com/guicoelhodev/ReactMusic/raw/main/github/readme_bg.png',
+  'https://github.com/guicoelhodev/social_dev/raw/main/github/img/homepage_preview.png',
+  'https://github.com/guicoelhodev/discord-clone/raw/master/github/home_view.png',
 ]
 </script>
 <template>
   <div>
+
     <swiper
       style="pointer-events: visible"
       :effect="'coverflow'"
@@ -42,11 +39,14 @@ const links = [
     >
       <swiper-slide v-for="link in links" :key="link">
         <!-- <img :src="link" /> -->
-        <div class="aspect-video w-full bg-white rounded-2xl">
+        <div class="aspect-video w-full bg-white rounded-2xl" :onClick="() => showInfo = !showInfo">
           <img :src="link" class="w-full h-full rounded-2xl object-cover"/>
         </div>
     </swiper-slide>
     </swiper>
+
+
+    <carousel-card-info  v-if="showInfo"/>
   </div>
 </template>
 
@@ -54,7 +54,7 @@ const links = [
 .swiper {
   width: 100%;
   max-width: 700px;
-  background-color: white;
+  /* background-color: white; */
   padding-top: 50px;
   padding-bottom: 50px;
 }
