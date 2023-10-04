@@ -19,11 +19,9 @@ const links = [
   'https://swiperjs.com/demos/images/nature-8.jpg',
   'https://swiperjs.com/demos/images/nature-9.jpg',
 ]
-
 </script>
 <template>
   <div>
-
     <swiper
       style="pointer-events: visible"
       :effect="'coverflow'"
@@ -42,8 +40,11 @@ const links = [
       class="mySwiper"
     >
       <swiper-slide v-for="link in links" :key="link">
-        ><img :src="link"
-      /></swiper-slide>
+        <!-- <img :src="link" /> -->
+        <div class="aspect-video w-full bg-white rounded-2xl">
+          <img :src="link" class="w-full h-full rounded-2xl object-cover"/>
+        </div>
+    </swiper-slide>
     </swiper>
   </div>
 </template>
@@ -51,6 +52,8 @@ const links = [
 <style scoped>
 .swiper {
   width: 100%;
+  max-width: 700px;
+  background-color: white;
   padding-top: 50px;
   padding-bottom: 50px;
 }
@@ -58,12 +61,14 @@ const links = [
 .swiper-slide {
   background-position: center;
   background-size: cover;
-  width: 300px;
-  height: 300px;
+  width: 500px;
 }
 
-.swiper-slide img {
+/* .swiper-slide img {
   display: block;
+  object-fit: cover;
   width: 100%;
-}
+  height: 80%;
+  ba
+} */
 </style>
