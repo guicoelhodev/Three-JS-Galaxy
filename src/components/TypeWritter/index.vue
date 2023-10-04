@@ -9,14 +9,14 @@
 <script setup lang="ts">
 
 const props = defineProps({
-  msg: String,
-  delayTime: Number,
-  classname: String,
-  fixContent: Boolean,
+  msg: { type: String, required: true },
+  delayTime: { type: Number, required: true },
+  classname: { type: String, default: '', required: false},
+  fixContent: { type: Boolean, default: false, required: false },
 })
 
 const text = ref('')
-const message = props.msg ?? ''
+const message = props.msg
 const speed = 90
 const className = `text-white ${props.classname}`
 
