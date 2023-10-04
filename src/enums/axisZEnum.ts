@@ -1,5 +1,5 @@
 export enum axisZEnum {
-  'moveText' = -600,
+  'moveText' = -580,
   'webStack' = -1200,
   'projects' = -1800
 }
