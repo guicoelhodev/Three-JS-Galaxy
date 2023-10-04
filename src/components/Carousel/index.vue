@@ -1,115 +1,69 @@
 <script setup lang="ts">
-const carousel = ref<HTMLDivElement | null>(null)
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { EffectCoverflow, Pagination } from 'swiper/modules'
 
-const items = Array.from({ length: 10 }, (_, i) => i + 1)
-const currentCard = ref(2)
+import 'swiper/css'
+import 'swiper/css/effect-coverflow'
+import 'swiper/css/pagination'
 
-let isDragging = false
-let startPosition = { x: 0, y: 0 }
-let scrollLeft = 0
+const modules = [EffectCoverflow, Pagination]
 
-const handleMouseDown = (event: MouseEvent) => {
-  if (!carousel.value) return
-
-  isDragging = true
-  startPosition = {
-    x: event.clientX,
-    y: event.clientY,
-  }
-  scrollLeft = carousel.value.scrollLeft
-}
-
-const handleMouseMove = (event: MouseEvent) => {
-  if (!isDragging || !carousel.value) return
-
-  const deltaX = event.clientX - startPosition.x
-
-  carousel.value.scrollTo({
-    left: scrollLeft - deltaX,
-    behavior: 'smooth',
-  })
-
-  return updateCurrentCard()
-}
-
-const updateCurrentCard = () => {
-  if (!carousel.value) return
-
-  const carouselRect = carousel.value.getBoundingClientRect()
-  const carouselCenter = carouselRect.left + carouselRect.width / 2
-
-  const cards = carousel.value.querySelectorAll('.card')
-
-  cards.forEach((card, index) => {
-    const cardRect = card.getBoundingClientRect()
-    const cardCenter = cardRect.left + cardRect.width / 2
-
-    if(cardCenter - carouselCenter < cardRect.width / 2){
-      currentCard.value = index + 1
-    }
-  })
-}
+const links = [
+  'https://swiperjs.com/demos/images/nature-1.jpg',
+  'https://swiperjs.com/demos/images/nature-2.jpg',
+  'https://swiperjs.com/demos/images/nature-3.jpg',
+  'https://swiperjs.com/demos/images/nature-4.jpg',
+  'https://swiperjs.com/demos/images/nature-5.jpg',
+  'https://swiperjs.com/demos/images/nature-6.jpg',
+  'https://swiperjs.com/demos/images/nature-7.jpg',
+  'https://swiperjs.com/demos/images/nature-8.jpg',
+  'https://swiperjs.com/demos/images/nature-9.jpg',
+]
 
 </script>
 <template>
   <div>
-    <section
-      ref="carousel"
-      class="carousel p-2 flex gap-6 items-center max-w-[1060px]"
+
+    <swiper
       style="pointer-events: visible"
-      @mousedown="handleMouseDown"
-      @mousemove="handleMouseMove"
-      @mouseup="() => (isDragging = false)"
-      @mouseleave="() => (isDragging = false)"
+      :effect="'coverflow'"
+      :grabCursor="true"
+      :centeredSlides="true"
+      :slidesPerView="'auto'"
+      :coverflowEffect="{
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows: true,
+      }"
+      :pagination="true"
+      :modules="modules"
+      class="mySwiper"
     >
-      <article
-        v-for="item in items"
-        :key="item"
-        :class="[
-          'card h-32 aspect-video bg-white p-2 rounded-md',
-          { active: item === currentCard },
-          { rotateLeft: item === currentCard - 1 },
-          { rotateRight: item === currentCard + 1 },
-        ]"
-        style="pointer-events: none;"
-      >
-        {{ item }}
-      </article>
-    </section>
+      <swiper-slide v-for="link in links" :key="link">
+        ><img :src="link"
+      /></swiper-slide>
+    </swiper>
   </div>
 </template>
 
 <style scoped>
-@keyframes return {
-  0% {
-    transform: perspective(800px) rotateY(40deg);
-  }
-  100% {
-    transform: perspective(800px) rotateY(0deg);
-  }
-}
-.carousel {
-  overflow: hidden !important;
-  scroll-snap-type: x mandatory;
+.swiper {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
-.card {
-  flex: 0 0 auto;
-  scroll-snap-align: center;
-}
-
-.active {
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 300px;
   height: 300px;
-  transition: all 300ms ease-in-out;
-  /* animation: return 1s infinite alternate; */
-}
-.rotateLeft {
-  transform-style: preserve-3d;
-  transform: perspective(800px) rotateY(40deg);
 }
 
-.rotateRight {
-  transform-style: preserve-3d;
-  transform: perspective(800px) rotateY(-40deg);
+.swiper-slide img {
+  display: block;
+  width: 100%;
 }
 </style>
