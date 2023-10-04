@@ -49,7 +49,8 @@ const messageTypeCode = computed(() => viewStore.axisZ)
     v-if="messageTypeCode < axisZEnum.projects && messageTypeCode > -2000"
     class="info-2 centerDiv flex flex-col items-center gap-2"
   >
-    <p class="text-white text-2xl font-semibold">Thats my projects</p>
+    <!-- <AxisZMessageProjects /> -->
+    <Carousel />
   </section>
 </template>
 
