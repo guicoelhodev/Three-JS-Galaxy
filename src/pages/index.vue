@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import * as THREE from 'three'
-import { onMounted } from 'vue'
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
