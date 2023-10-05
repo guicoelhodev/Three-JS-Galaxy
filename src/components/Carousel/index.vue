@@ -20,7 +20,7 @@ const links = [
   <div>
 
     <swiper
-      style="pointer-events: visible"
+      :style="{'pointer-events': showInfo ? 'hidden' : 'visible'}"
       :effect="'coverflow'"
       :grabCursor="true"
       :centeredSlides="true"
@@ -44,7 +44,6 @@ const links = [
         </div>
     </swiper-slide>
     </swiper>
-
 
     <carousel-card-info  v-if="showInfo"/>
   </div>
