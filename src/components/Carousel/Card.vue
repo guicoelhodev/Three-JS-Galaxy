@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ICarouselItem } from '@/types/types';
 import { Icon } from '@iconify/vue'
+import { languages } from '@/data/languagesData'
 import gsap from 'gsap'
 
 type IProps = {
@@ -8,7 +9,8 @@ type IProps = {
   info: ICarouselItem | null
   image: string;
 }
-const { toggleModal, info  } = defineProps<IProps>()
+const { toggleModal, info  } = defineProps<IProps>();
+const languagesByCard = Object.values(languages).filter((lang) => info?.languages.includes(lang.id))
 
 const showContent = ref(false)
 
@@ -16,7 +18,7 @@ onMounted(() => {
   gsap.to('.container_item', {
     width: '30px',
     height: '30px',
-    duration: 0.5,
+    duration: 0.2,
     borderRadius: '40px',
     onComplete: () => {
       gsap.to('.container_item', {
@@ -24,7 +26,7 @@ onMounted(() => {
         height: '600px',
         width: '600px',
         ease: 'power2.in',
-        duration: 0.4,
+        duration: 0.3,
         onComplete: () => {
           showContent.value = true
         },
@@ -33,7 +35,6 @@ onMounted(() => {
   })
 })
 
-console.log(info)
 </script>
 
 <template>
@@ -70,21 +71,11 @@ console.log(info)
           </aside>
 
           <footer class="flex justify-end gap-4">
-            <img
-              class="w-12 object-contain"
-              src="@/assets/png/react_logo.png"
-              alt="logo"
-            />
-            <img
-              class="w-12 object-contain"
-              src="@/assets/png/typescript_logo.png"
-              alt="logo"
-            />
-            <img
-              class="w-12 object-contain"
-              src="https://miro.medium.com/v2/resize:fit:1400/1*elhu-42TzQEdsFjKDbQhhA.png"
-              alt="logo"
-            />
+
+            <li v-for="lang in languagesByCard" :key="lang.icon" class="flex flex-col items-center gap-2 font-semibold">
+              <Icon :icon='lang.icon' height="48px" width="48px" />
+            </li>
+     
           </footer>
         </article>
       </section>
