@@ -9,7 +9,7 @@ export class RocketModel {
   }
 
   load() {
-    this.glftLoader.load('../../assets/rocket/scene.gltf', (gltfScene) => {
+    this.glftLoader.load('../../assets/3d/rocket/scene.gltf', (gltfScene) => {
       gltfScene.scene.position.x = 3.4
       gltfScene.scene.position.y = 32
       gltfScene.scene.position.z = -600
