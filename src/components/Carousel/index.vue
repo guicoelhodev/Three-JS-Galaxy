@@ -1,26 +1,24 @@
 <script setup lang="ts">
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { EffectCoverflow, Pagination } from 'swiper/modules'
+import { carouselList } from '@/data/carouselList'
 
 import 'swiper/css'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
+import { ICarouselItem } from '@/types/types'
 
 const modules = [EffectCoverflow, Pagination]
-const showInfo = ref(false);
+const infoCard = ref<ICarouselItem | null>(null)
 
-const links = [
-  'https://github.com/guicoelhodev/Pokedex-v3/raw/main/github/homepage_2.png',
-  'https://github.com/guicoelhodev/ReactMusic/raw/main/github/readme_bg.png',
-  'https://github.com/guicoelhodev/social_dev/raw/main/github/img/homepage_preview.png',
-  'https://github.com/guicoelhodev/discord-clone/raw/master/github/home_view.png',
-]
+const handleCardInfo = (card: ICarouselItem) => {
+  infoCard.value = card
+}
 </script>
 <template>
   <div>
-
     <swiper
-      :style="{'pointer-events': showInfo ? 'none' : 'visible'}"
+      :style="{ 'pointer-events': infoCard ? 'none' : 'visible' }"
       :effect="'coverflow'"
       :grabCursor="true"
       :centeredSlides="true"
@@ -37,14 +35,24 @@ const links = [
       :modules="modules"
       class="mySwiper"
     >
-      <swiper-slide v-for="link in links" :key="link">
-        <div class="aspect-video w-full bg-white rounded-2xl" :onClick="() => showInfo = !showInfo">
-          <img :src="link" class="w-full h-full rounded-2xl object-cover"/>
+      <swiper-slide v-for="item in carouselList" :key="item.title">
+        <div
+          class="aspect-video w-full bg-white rounded-2xl"
+          v-on:click="() => handleCardInfo(item)"
+        >
+          <img
+            :src="item.imagePath"
+            class="w-full h-full rounded-2xl object-cover"
+          />
         </div>
-    </swiper-slide>
+      </swiper-slide>
     </swiper>
 
-    <carousel-card-info v-if="showInfo"  :toggle-modal="() => showInfo = !showInfo"/>
+    <carousel-card-info
+      v-if="infoCard"
+      :info="infoCard"
+      :toggle-modal="() => (infoCard = null)"
+    />
   </div>
 </template>
 
