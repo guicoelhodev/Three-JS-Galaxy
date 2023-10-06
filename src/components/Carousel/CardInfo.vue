@@ -40,23 +40,25 @@ console.log(info)
     style="pointer-events: visible;"
     class="z-30 container_item bg-zinc-50 w-0 h-0 rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
   >
-    <div v-if="showContent && info" class="card-content h-full max-h-[500px]">
+    <div v-if="showContent && info" class="card-content h-full max-h-[520px]">
       <header class="flex justify-between gap-4 p-4">
-        <h3 class="font-bold text-3xl text-blue-400">{{ info.title }} </h3>
+        <h3 class="font-bold text-3xl text-blue-400">{{ info.title }}</h3>
           <button class="cursor-pointer mr-1" v-on:click="() => toggleModal()">
             <Icon icon="ooui:close" height="28" color="gray" />
           </button>
       </header>
 
-      <section class="flex items-strech h-full">
-        <article class="w-full p-4 flex flex-col gap-4">
+      <section class="flex items-stretch h-full">
+        <article class="w-full  p-4 flex flex-col gap-4">
           <h4 class="subtitle">Description</h4>
 
-          <p class="text">{{ info.description }}</p>
+          <article class="overflow-y-auto">
+            <p class="text">{{ info.description }}</p>
+          </article>
 
-          <aside>
+          <aside class="mt-auto">
             <a
-              href="https://github.com/guicoelhodev/Pokedex-v3"
+              :href="info.link"
               target="_blank"
             >
               <img
