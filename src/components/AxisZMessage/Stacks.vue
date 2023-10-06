@@ -1,52 +1,10 @@
 <script setup lang="ts">
-import ReactLogo from '@/assets/png/react_logo.png'
-import TsLogo from '@/assets/png/typescript_logo.png'
-import ThreeLogo from '@/assets/png/three_logo.png'
-import GraphqlLogo from '@/assets/png/graphql_logo.png'
-import TailwindLogo from '@/assets/png/tailwind_white_logo.png'
-import NodeLogo from '@/assets/png/node_logo.png'
-import FirebaseLogo from '@/assets/png/firebase_logo.png'
-import SupabaseLogo from '@/assets/png/supabase_logo.png'
-import NextLogo from '@/assets/png/next_logo.png'
+import { Icon } from '@iconify/vue';
+import { languages } from '@/data/languagesData';
+import { ITools } from '@/types/types';
 
-const images: { src: string; title: string }[] = [
-  {
-    src: ReactLogo,
-    title: 'React JS',
-  },
-  {
-    src: TsLogo,
-    title: 'Typescript',
-  },
-  {
-    src: ThreeLogo,
-    title: 'Three JS',
-  },
-  {
-    src: GraphqlLogo,
-    title: 'GraphQL',
-  },
-  {
-    src: TailwindLogo,
-    title: 'Tailwind',
-  },
-  {
-    src: NodeLogo,
-    title: 'Node JS',
-  },
-  {
-    src: FirebaseLogo,
-    title: 'Firebase',
-  },
-  {
-    src: SupabaseLogo,
-    title: 'Supabase',
-  },
-  {
-    src: NextLogo,
-    title: 'Next JS',
-  }
-]
+  const notAllowedLangs: ITools[] = ['reactQuery', 'firebase']
+  const languagesFiltered = Object.values(languages).filter((lang) => !notAllowedLangs.includes(lang.id) )
 </script>
 
 <template>
@@ -55,13 +13,9 @@ const images: { src: string; title: string }[] = [
     <ul
       class="max-w-[680px] p-4 flex flex-wrap items-center justify-center gap-8"
     >
-      <li v-for="image in images" :key="image.src" class="flex flex-col items-center gap-2 font-semibold">
-        <img
-          class="w-16 object-contain aspect-square"
-          :src="image.src"
-          alt="language stack logo overview"
-        />
-        <span class="font-bold text-lg text-cyan-400 px-2 py-1 rounded-sm">{{ image.title }}</span>
+      <li v-for="lang in languagesFiltered" :key="lang.icon" class="flex flex-col items-center gap-2 font-semibold">
+        <Icon :icon='lang.icon' height="56px" width="56px" />
+        <span class="font-bold text-lg text-cyan-400 px-2 py-1 rounded-sm">{{ lang.title }}</span>
       </li>
     </ul>
   </section>
