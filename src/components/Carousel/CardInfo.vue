@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 import gsap from 'gsap'
+
+const { toggleModal } = defineProps({
+  toggleModal: {
+     type: Function,
+     required: true
+  }
+});
+
 const showContent = ref(false)
 
 onMounted(() => {
@@ -27,12 +35,13 @@ onMounted(() => {
 
 <template>
   <div
+    style="pointer-events: visible;"
     class="z-30 container_item bg-zinc-50 w-0 h-0 rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
   >
     <div v-if="showContent" class="card-content h-full max-h-[500px]">
       <header class="flex justify-between gap-4 p-4">
         <h3 class="font-bold text-3xl text-blue-400">Pokedex-v3 project</h3>
-          <button class="mr-1">
+          <button class="cursor-pointer mr-1" v-on:click="() => toggleModal()">
             <Icon icon="ooui:close" height="28" color="gray" />
           </button>
       </header>

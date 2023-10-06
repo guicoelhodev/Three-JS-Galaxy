@@ -20,7 +20,7 @@ const links = [
   <div>
 
     <swiper
-      :style="{'pointer-events': showInfo ? 'hidden' : 'visible'}"
+      :style="{'pointer-events': showInfo ? 'none' : 'visible'}"
       :effect="'coverflow'"
       :grabCursor="true"
       :centeredSlides="true"
@@ -38,14 +38,13 @@ const links = [
       class="mySwiper"
     >
       <swiper-slide v-for="link in links" :key="link">
-        <!-- <img :src="link" /> -->
         <div class="aspect-video w-full bg-white rounded-2xl" :onClick="() => showInfo = !showInfo">
           <img :src="link" class="w-full h-full rounded-2xl object-cover"/>
         </div>
     </swiper-slide>
     </swiper>
 
-    <carousel-card-info  v-if="showInfo"/>
+    <carousel-card-info v-if="showInfo"  :toggle-modal="() => showInfo = !showInfo"/>
   </div>
 </template>
 
