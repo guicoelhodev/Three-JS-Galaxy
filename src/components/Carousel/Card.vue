@@ -6,6 +6,7 @@ import gsap from 'gsap'
 type IProps = {
   toggleModal: Function
   info: ICarouselItem | null
+  image: string;
 }
 const { toggleModal, info  } = defineProps<IProps>()
 
@@ -63,7 +64,7 @@ console.log(info)
             >
               <img
                 class="w-[340px] m-auto object-cover aspect-video rounded-md"
-                :src="info.imagePath"
+                :src="image"
               />
             </a>
           </aside>

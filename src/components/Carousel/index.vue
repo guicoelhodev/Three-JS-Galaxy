@@ -2,6 +2,19 @@
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { EffectCoverflow, Pagination } from 'swiper/modules'
 import { carouselList } from '@/data/carouselList'
+import { ImageId } from '@/types/types'
+
+import discordPng from '@/assets/png/discord_clone.png';
+import pokedexPng from '@/assets/png/pokedex.png';
+import reactMusicPng from '@/assets/png/react_music.png';
+import socialDevPng from '@/assets/png/social_dev.png';
+
+const images: {[Key in ImageId]: string} = {
+  discord: discordPng,
+  pokedex: pokedexPng,
+  reactMusic: reactMusicPng,
+  socialDev: socialDevPng,
+}
 
 import 'swiper/css'
 import 'swiper/css/effect-coverflow'
@@ -41,16 +54,18 @@ const handleCardInfo = (card: ICarouselItem) => {
           v-on:click="() => handleCardInfo(item)"
         >
           <img
-            :src="item.imagePath"
+            :src="images[item.imageId]"
             class="w-full h-full rounded-2xl object-cover"
+            loading="lazy"
           />
         </div>
       </swiper-slide>
     </swiper>
 
-    <carousel-card-info
+    <carousel-card
       v-if="infoCard"
       :info="infoCard"
+      :image="images[infoCard.imageId]"
       :toggle-modal="() => (infoCard = null)"
     />
   </div>
@@ -71,11 +86,8 @@ const handleCardInfo = (card: ICarouselItem) => {
   width: 500px;
 }
 
-/* .swiper-slide img {
-  display: block;
-  object-fit: cover;
-  width: 100%;
-  height: 80%;
-  ba
-} */
+.bounce {
+  animation: bounce 1s infinite;
+}
+
 </style>
