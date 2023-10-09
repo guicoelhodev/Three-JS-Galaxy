@@ -20,6 +20,7 @@ export class AstronautModel {
     const loader = new FBXLoader()
     loader.setPath('../../assets/3d/astronaut/')
 
+    
     const fbx = await loader.loadAsync('character.fbx')
 
     fbx.scale.setScalar(0.3)
