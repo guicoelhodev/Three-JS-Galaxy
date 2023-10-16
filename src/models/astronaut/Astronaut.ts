@@ -18,7 +18,7 @@ export class AstronautModel {
 
   async load() {
     const loader = new FBXLoader()
-    loader.setPath('../../assets/3d/astronaut/')
+    loader.setPath('gltf/astronaut/')
 
     
     const fbx = await loader.loadAsync('character.fbx')
@@ -39,7 +39,7 @@ export class AstronautModel {
 
   async loadAllAnimations() {
     const animLoader = new FBXLoader()
-    animLoader.setPath('../../assets/3d/astronaut/')
+    animLoader.setPath('gltf/astronaut/')
     const animations = []
 
     const relativeAnimPaths = [

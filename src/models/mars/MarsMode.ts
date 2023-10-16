@@ -9,7 +9,7 @@ export class MarsModel {
   }
 
   load() {
-    this.glftLoader.load('../../assets/3d/mars/scene.gltf', (gltfScene) => {
+    this.glftLoader.load('gltf/mars/scene.gltf', (gltfScene) => {
       gltfScene.scene.position.x = 0
       gltfScene.scene.position.y = -11
       gltfScene.scene.position.z = 0
