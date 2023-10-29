@@ -4,25 +4,10 @@ import { useViewStore } from '@/store/useViewStore'
 
 const viewStore = useViewStore()
 const messageTypeCode = computed(() => viewStore.axisZ)
-
-
-
 </script>
 
 <template>
-  <!-- <section v-if="messageTypeCode === axisZEnum.moveText" class="info-1 centerDiv">
-    <p class="text-white text-3xl">Move text</p>
-  </section> -->
-
-  <!-- <section class="info-1 centerDiv">
-    <article
-      id="space_container"
-      class="flex flex-col items-center justify-center gap-2"
-    >
-      <p class="text-white text-3xl">Press space to begin</p>
-      <Icon icon="tabler:space" color="white" width="68" height="68" />
-    </article>
-  </section> -->
+  <SwipperPlanet />
   <section
     v-if="messageTypeCode > axisZEnum.webStack"
     class="info-2 centerDiv flex flex-col items-center gap-2 text-white text-2xl font-semibold"
