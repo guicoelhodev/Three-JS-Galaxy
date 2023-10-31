@@ -20,7 +20,6 @@ const messageTypeCode = computed(() => viewStore.axisZ)
       <img class="w-12" src="@/assets/jpg/s_keyboard.jpg" alt="arrow" />
     </div>
   </section>
-  -->
 
   <div
     style="pointer-events: visible"

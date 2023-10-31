@@ -1,6 +1,5 @@
 <template>
   <div
-    style="pointer-events: visible"
     class="w-full max-w-7xl min-h-screen h-full flex flex-col items-center gap-4 overflow-y-auto p-4"
   >
     <header
