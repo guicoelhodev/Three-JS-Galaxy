@@ -1,11 +1,11 @@
 <template>
   <div
-    class="text-white fixed right-0 rotate-[270deg] p-4 rounded-md"
+    class="text-white fixed right-0 rotate-[270deg] p-4 rounded-md translate-x-[80px]"
     style="pointer-events: visible"
   >
-    <section class="relative flex bg-red-200 p-2 w-[260px]">
+    <section class="relative flex p-2 w-[260px]">
       <input
-        class="mx-auto w-full bg-red-200"
+        class="mx-auto w-full"
         type="range"
         min="0"
         max="100"
