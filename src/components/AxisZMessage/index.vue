@@ -13,6 +13,7 @@ const messageTypeCode = computed(() => viewStore.axisZ)
     v-if="messageTypeCode > axisZEnum.webStack"
     class="info-2 centerDiv flex flex-col items-center gap-2 text-white text-2xl font-semibold"
   >
+    <p>This project still in development, but press space to begin your journey</p>
     <p>To move the astronaut press</p>
     <div class="flex items-center gap-2">
       <img class="w-12" src="@/assets/jpg/w_keyboard.jpg" alt="arrow" />
