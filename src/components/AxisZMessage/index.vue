@@ -4,29 +4,16 @@ import { useViewStore } from '@/store/useViewStore'
 
 const viewStore = useViewStore()
 const messageTypeCode = computed(() => viewStore.axisZ)
-
-
-
 </script>
 
 <template>
-  <!-- <section v-if="messageTypeCode === axisZEnum.moveText" class="info-1 centerDiv">
-    <p class="text-white text-3xl">Move text</p>
-  </section> -->
+  <SwipperPlanet />
 
-  <!-- <section class="info-1 centerDiv">
-    <article
-      id="space_container"
-      class="flex flex-col items-center justify-center gap-2"
-    >
-      <p class="text-white text-3xl">Press space to begin</p>
-      <Icon icon="tabler:space" color="white" width="68" height="68" />
-    </article>
-  </section> -->
   <section
     v-if="messageTypeCode > axisZEnum.webStack"
     class="info-2 centerDiv flex flex-col items-center gap-2 text-white text-2xl font-semibold"
   >
+    <p>This project still in development, but press space to begin your journey</p>
     <p>To move the astronaut press</p>
     <div class="flex items-center gap-2">
       <img class="w-12" src="@/assets/jpg/w_keyboard.jpg" alt="arrow" />
@@ -35,21 +22,21 @@ const messageTypeCode = computed(() => viewStore.axisZ)
     </div>
   </section>
 
-  <section
+  <div
+    style="pointer-events: visible"
     v-if="
       messageTypeCode < axisZEnum.webStack &&
       messageTypeCode > axisZEnum.projects
     "
-    class="info-2 centerDiv flex flex-col items-center gap-2"
+    class="fadeIn w-full h-full"
   >
-    <AxisZMessageStacks />
-  </section>
+    <AboutMe />
+  </div>
 
   <section
     v-if="messageTypeCode < axisZEnum.projects && messageTypeCode > -2000"
     class="info-2 centerDiv flex flex-col items-center gap-2"
   >
-    <!-- <AxisZMessageProjects /> -->
     <Carousel />
   </section>
 </template>
@@ -70,5 +57,9 @@ const messageTypeCode = computed(() => viewStore.axisZ)
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.fadeIn {
+  animation: fadeIn 1s;
 }
 </style>
