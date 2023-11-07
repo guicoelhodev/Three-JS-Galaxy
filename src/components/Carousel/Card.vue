@@ -13,28 +13,36 @@ const props = defineProps<TProps>()
 <template>
   <div
     style="pointer-events: visible"
-    class="w-full h-full h-full flex gap-4 overflow-hidden pb-4"
+    class="w-full h-full h-full flex flex-col gap-4 overflow-y-auto md:overflow-hidden p-4 md:pb-4 rounded-lg md:flex-row"
     :style="{ backgroundColor: props.bg[0] }"
   >
-    <section class="w-full relative">
+    <section class="hidden flex-col gap-4 w-full relative md:flex">
       <span
-        class="circle left-[-8rem] z-30 translate-x-[-200px]"
+        class="z-30 translate-x-[-200px] circle left-[-8rem]"
         :style="{ backgroundColor: props.bg[0] }"
       >
         <img
-          class="object-cover h-full"
+          class="object-cover"
           src="~/assets/png/eeve.png"
           alt="eeve pokemon image"
         />
       </span>
       <span
-        class="circle left-[-2rem] z-20 translate-x-[-140px]"
+        class="left-[-2rem] z-20 translate-x-[-140px] circle"
         :style="{ backgroundColor: props.bg[1] }"
-      />
+      ></span>
       <span
-        class="circle left-4 z-10 translate-x-[-80px]"
+        class="left-4 z-10 translate-x-[-80px] circle"
         :style="{ backgroundColor: props.bg[2] }"
-      />
+      ></span>
+    </section>
+
+    <section class="w-56 mx-auto md:hidden">
+         <img
+          class="object-contain h-full w-full "
+          src="~/assets/png/eeve.png"
+          alt="eeve pokemon image"
+        />
     </section>
     <section class="z-40 w-full flex flex-col gap-2">
       <header class="px-4 pt-4">
