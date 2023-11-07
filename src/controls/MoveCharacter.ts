@@ -59,7 +59,7 @@ export class MoveCharacter {
     })
   }
 
-  private navigateAstronaut() {
+  public navigateAstronaut() {
     if (!this.astronaut) return
 
     gsap.to(this.astronaut.position, {

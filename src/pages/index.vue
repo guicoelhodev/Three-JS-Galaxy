@@ -33,6 +33,7 @@ const initialMesage: { msg: string; delay: number }[] = [
   },
 ]
 
+const handleMoveCharacter = ref<null | any >(() => {});
 
 onMounted(async () => {
 
@@ -57,11 +58,13 @@ onMounted(async () => {
 
   const astronautFbx = await astronautModel.load()
   const { animations } = await astronautModel.loadAllAnimations()
+
   const moveCharacter = new MoveCharacter(camera, astronautFbx)
+
+  handleMoveCharacter.value = () => moveCharacter.navigateAstronaut;
 
   let orbitControl = new OrbitControls(camera, renderer.domElement)
 
-    console.log('AA:',orbitControl)
   const position = moveCharacter.astronaut?.position;
     if(!position)return;
 
@@ -70,8 +73,8 @@ onMounted(async () => {
     // orbitControl.target.set(0, 0, -20)
     orbitControl.update()
 
+  
   // make 3d camera move
-
 
   const rotatePlanets = () => {
     const planets = [rocketModel.rocketScene, earthModel.earthScene]
@@ -133,7 +136,7 @@ onMounted(async () => {
       />
     </ul> -->
 
-    <AxisZMessage />
+    <AxisZMessage :astrounat-movement="handleMoveCharacter()" />
 
   </div>
 </template>
