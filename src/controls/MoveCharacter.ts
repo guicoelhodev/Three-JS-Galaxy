@@ -1,4 +1,3 @@
-import { ICamera, IScene } from '@/types/types'
 import * as THREE from 'three'
 
 import gsap from 'gsap'
@@ -31,7 +30,7 @@ export class MoveCharacter {
 
   camera?
 
-  constructor(aCamera: ICamera, astronautModel: THREE.Group) {
+  constructor(aCamera: THREE.PerspectiveCamera, astronautModel: THREE.Group) {
     this.camera = aCamera
     this.astronaut = astronautModel
     this.eventListener()

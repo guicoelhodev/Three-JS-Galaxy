@@ -1,13 +1,9 @@
 <script setup lang="ts">
-type TProps = {
-  bg: string[]
-  color: {
-    primary: string
-    secondary: string
-  }
-}
+import { TCarouselItem } from '@/types';
 
-const props = defineProps<TProps>()
+type TProps = TCarouselItem;
+
+const props = defineProps<TCarouselItem>()
 </script>
 
 <template>
@@ -23,7 +19,7 @@ const props = defineProps<TProps>()
       >
         <img
           class="object-cover ml-20"
-          src="~/assets/png/eeve.png"
+          src="@/assets/png/eeve.png"
           alt="eeve pokemon image"
         />
       </span>
@@ -40,7 +36,7 @@ const props = defineProps<TProps>()
     <section class="w-56 mx-auto md:hidden">
          <img
           class="object-contain h-full w-full "
-          src="~/assets/png/eeve.png"
+          src="@/assets/png/eeve.png"
           alt="eeve pokemon image"
         />
     </section>
