@@ -22,7 +22,7 @@ const props = defineProps<TProps>()
         :style="{ backgroundColor: props.bg[0] }"
       >
         <img
-          class="object-cover"
+          class="object-cover ml-20"
           src="~/assets/png/eeve.png"
           alt="eeve pokemon image"
         />
@@ -32,7 +32,7 @@ const props = defineProps<TProps>()
         :style="{ backgroundColor: props.bg[1] }"
       ></span>
       <span
-        class="left-4 z-10 translate-x-[-80px] circle"
+        class="left-4 z-10 translate-x-[-90px] circle"
         :style="{ backgroundColor: props.bg[2] }"
       ></span>
     </section>
