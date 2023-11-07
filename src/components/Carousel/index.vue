@@ -39,7 +39,7 @@ const handleCardInfo = (card: ICarouselItem) => {
       :loop="true"
       :coverflowEffect="{
         rotate: 50,
-        stretch: 0,
+        stretch: 1,
         depth: 100,
         modifier: 1,
         slideShadows: true,
@@ -49,7 +49,7 @@ const handleCardInfo = (card: ICarouselItem) => {
       class="mySwiper"
     >
       <swiper-slide v-for="item in carouselList" :key="item.title">
-        <div
+        <!-- <div
           class="aspect-video w-full bg-white rounded-2xl"
           v-on:click="() => handleCardInfo(item)"
         >
@@ -58,32 +58,33 @@ const handleCardInfo = (card: ICarouselItem) => {
             class="w-full h-full rounded-2xl object-cover"
             loading="lazy"
           />
-        </div>
+        </div> -->
+        <carousel-card />
       </swiper-slide>
     </swiper>
 
-    <carousel-card
+    <!-- <carousel-card
       v-if="infoCard"
       :info="infoCard"
       :image="images[infoCard.imageId]"
       :toggle-modal="() => (infoCard = null)"
-    />
+    /> -->
   </div>
 </template>
 
 <style scoped>
 .swiper {
-  width: 100%;
-  max-width: 700px;
-  /* background-color: white; */
-  padding-top: 50px;
-  padding-bottom: 50px;
+  @apply  p-4 rounded-md bg-white translate-y-[-2rem] sm:translate-y-0 ;
+  width: calc(100vw - 10rem);
+
+  @media (max-width: 768px) {
+    width: calc(100vw - 2rem);
+  }
 }
 
 .swiper-slide {
-  background-position: center;
-  background-size: cover;
-  width: 500px;
+  @apply bg-center bg-cover max-h-[80vh] w-full aspect-[1/2] md:aspect-[2/1] md:max-w-[800px];
+
 }
 
 .bounce {
