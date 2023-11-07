@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { EffectCoverflow, Pagination } from 'swiper/modules'
-
 import 'swiper/css'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
 
+import { projectList} from '@/data/projectsList';
 const modules = [EffectCoverflow, Pagination]
 </script>
 <template>
@@ -16,7 +16,7 @@ const modules = [EffectCoverflow, Pagination]
       :grabCursor="true"
       :centeredSlides="true"
       :slidesPerView="'auto'"
-      :loop="true"
+      :loop="false"
       :coverflowEffect="{
         rotate: 60,
         stretch: 1,
@@ -28,11 +28,8 @@ const modules = [EffectCoverflow, Pagination]
       :modules="modules"
       class="mySwiper"
     >
-      <swiper-slide v-for="item in [1,1,1,1,1]" :key="item">
-        <carousel-card
-          :bg="['#E5F0D9', '#C1EAC3', '#9AD9A5']"
-          :color="{ primary: '#529801', secondary: '#6FCF0E' }"
-        />
+      <swiper-slide v-for="item in projectList" :key="item.data.title">
+        <carousel-card v-bind="item" />
       </swiper-slide>
     </swiper>
   </div>

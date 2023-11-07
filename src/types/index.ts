@@ -7,5 +7,9 @@ export type TCarouselItem = {
     secondary: string;
   }
   image: string;
-
+  data: {
+    title: string;
+    description: string;
+    link: string;
+  }
 }
