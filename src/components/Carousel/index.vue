@@ -4,12 +4,12 @@ import { EffectCoverflow, Pagination } from 'swiper/modules'
 import { carouselList } from '@/data/carouselList'
 import { ImageId } from '@/types/types'
 
-import discordPng from '@/assets/png/discord_clone.png';
-import pokedexPng from '@/assets/png/pokedex.png';
-import reactMusicPng from '@/assets/png/react_music.png';
-import socialDevPng from '@/assets/png/social_dev.png';
+import discordPng from '@/assets/png/discord_clone.png'
+import pokedexPng from '@/assets/png/pokedex.png'
+import reactMusicPng from '@/assets/png/react_music.png'
+import socialDevPng from '@/assets/png/social_dev.png'
 
-const images: {[Key in ImageId]: string} = {
+const images: { [Key in ImageId]: string } = {
   discord: discordPng,
   pokedex: pokedexPng,
   reactMusic: reactMusicPng,
@@ -23,10 +23,6 @@ import { ICarouselItem } from '@/types/types'
 
 const modules = [EffectCoverflow, Pagination]
 const infoCard = ref<ICarouselItem | null>(null)
-
-const handleCardInfo = (card: ICarouselItem) => {
-  infoCard.value = card
-}
 </script>
 <template>
   <div>
@@ -38,7 +34,7 @@ const handleCardInfo = (card: ICarouselItem) => {
       :slidesPerView="'auto'"
       :loop="true"
       :coverflowEffect="{
-        rotate: 50,
+        rotate: 60,
         stretch: 1,
         depth: 100,
         modifier: 1,
@@ -49,32 +45,18 @@ const handleCardInfo = (card: ICarouselItem) => {
       class="mySwiper"
     >
       <swiper-slide v-for="item in carouselList" :key="item.title">
-        <!-- <div
-          class="aspect-video w-full bg-white rounded-2xl"
-          v-on:click="() => handleCardInfo(item)"
-        >
-          <img
-            :src="images[item.imageId]"
-            class="w-full h-full rounded-2xl object-cover"
-            loading="lazy"
-          />
-        </div> -->
-        <carousel-card />
+        <carousel-card
+          :bg="['#E5F0D9', '#C1EAC3', '#9AD9A5']"
+          :color="{ primary: '#529801', secondary: '#6FCF0E' }"
+        />
       </swiper-slide>
     </swiper>
-
-    <!-- <carousel-card
-      v-if="infoCard"
-      :info="infoCard"
-      :image="images[infoCard.imageId]"
-      :toggle-modal="() => (infoCard = null)"
-    /> -->
   </div>
 </template>
 
 <style scoped>
 .swiper {
-  @apply  p-4 rounded-md bg-white translate-y-[-2rem] md:translate-y-0 ;
+  @apply p-4 rounded-md translate-y-[-2rem] md:translate-y-0;
   width: calc(100vw - 14rem);
 
   @media (max-width: 768px) {
@@ -83,12 +65,14 @@ const handleCardInfo = (card: ICarouselItem) => {
 }
 
 .swiper-slide {
-  @apply bg-center bg-cover max-h-[70vh] w-full aspect-[1/2] md:aspect-[2/1] md:max-w-[800px];
-
+  @apply bg-center bg-cover max-h-[70vh] mb-4 w-full aspect-[1/2] md:aspect-[2/1] md:max-w-[800px];
 }
 
 .bounce {
   animation: bounce 1s infinite;
 }
 
+.circle {
+  @apply rounded-full w-10 h-10;
+}
 </style>
