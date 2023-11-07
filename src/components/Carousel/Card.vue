@@ -32,14 +32,14 @@ const props = defineProps<TCarouselItem>()
       ></span>
     </section>
 
-    <section class="w-56 mx-auto md:hidden">
+    <section class="w-full mx-auto md:hidden">
          <img
           class="object-contain h-full w-full "
-          src="@/assets/png/eeve.png"
+          :src="props.image"
           alt="eeve pokemon image"
         />
     </section>
-    <section class="z-40 w-full flex flex-col gap-2">
+    <section class="z-40 w-full h-full flex flex-col gap-2">
       <header class="px-4 pt-4">
         <h3 class="text-3xl font-bold" :style="{ color: props.color.primary }">
           {{ props.data.title }}

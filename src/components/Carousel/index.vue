@@ -5,8 +5,10 @@ import 'swiper/css'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
 
-import { projectList} from '@/data/projectsList';
+import { projectList as list } from '@/data/projectsList';
 const modules = [EffectCoverflow, Pagination]
+
+const projectList = ref(list);
 </script>
 <template>
   <div>
