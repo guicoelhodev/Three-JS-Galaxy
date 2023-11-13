@@ -2,29 +2,29 @@
   <div class="w-full min-h-screen h-full overflow-y-auto p-4">
     <div class="max-w-7xl mx-auto flex flex-col items-center gap-4">
       <header
-        class="pt-8 p-4 flex items-start flex items-center gap-4 self-start"
+        class="pt-8 flex items-start flex items-center gap-4 self-start sm:p-4"
       >
         <img
           src="~/assets/jpg/guicoelho.jpg"
-          class="w-36 aspect-square rounded-full"
+          class="w-24 sm:w-36 aspect-square rounded-full"
           alt="avatar png"
         />
 
         <article>
           <aside class="flex items-center gap-2">
-            <h2 class="text-4xl font-bold text-white">
+            <h2 class="text-2xl sm:text-4xl font-bold text-white">
               Hi, I'm Guilherme Coelho
             </h2>
             <Icon icon="emojione:flag-for-brazil" width="38" />
           </aside>
 
-          <h3 class="mt-2 text-3xl font-semibold text-red-400">
+          <h3 class="mt-2 text-xl sm:text-3xl font-semibold text-red-400">
             Frontend developer
           </h3>
         </article>
       </header>
 
-      <section class="text-white text-3xl text-bold p-4 pt-20 text-center">
+      <section class="text-cyan-200 text-2xl text-bold p-4 pt-12 text-center sm:pt-20 sm:text-3xl ">
         <h4>
           I love to code new things, outside the box <br />
           that’s what I do
@@ -32,7 +32,7 @@
       </section>
 
       <section
-        class="max-w-5xl w-full mt-24 grid grid-cols-2 gap-8 gap-y-32 text-white text-xl"
+        class="max-w-5xl w-full mt-12 flex flex-col items-center gap-8 text-white text-xl sm:mt-24 sm:grid sm:grid-cols-2 sm:gap-y-32"
       >
         <article class="p-4 flex flex-col gap-16">
           <p>
@@ -74,7 +74,7 @@
           </p>
         </article>
 
-        <footer class="p-4 pb-12 col-span-2 flex flex-col items-center">
+        <footer class="p-4 pb-28 col-span-2 flex flex-col items-center">
           <img
             src="~/assets/svg/projects_view.svg"
             class="h-72"
