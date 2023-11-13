@@ -1,6 +1,6 @@
 <template>
   <div
-    class="z-30 text-white fixed bottom-[2rem]  p-4 rounded-md md:translate-x-[80px] md:rotate-[270deg] md:right-0 md:bottom-[50%] md:translate-y-[50%]"
+    class="z-30 text-white fixed bottom-[2rem] translate-x-[-20px]  p-4 rounded-md md:translate-x-[80px] md:rotate-[270deg] md:right-0 md:bottom-[50%] md:translate-y-[50%]"
     style="pointer-events: visible"
   >
     <section class="relative flex p-2 w-[260px]">
